@@ -55,3 +55,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/arjijiji.png
+    - assets/images/placeholder.jpeg

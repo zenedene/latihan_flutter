@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:latihan1/controllers/calculator_controller.dart';
+import 'package:latihan1/routes/routes.dart';
 import 'package:latihan1/widget/widget_button.dart';
 import 'package:latihan1/widget/widget_textField.dart';
 
@@ -109,6 +110,13 @@ class CalculatorPage extends StatelessWidget {
                 ),
               );
             }),
+            CustomButton(
+              text: "Move to Football Player List",
+              textColor: Colors.greenAccent,
+              onPressed: () {
+                Get.toNamed(AppRoutes.footballPlayers);
+              },
+            ),
           ],
         ),
       ),
