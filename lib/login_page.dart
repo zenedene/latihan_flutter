@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:latihan1/pages/calculator_page.dart';
+import 'package:latihan1/widget/widget_button.dart';
+import 'package:latihan1/widget/widget_textField.dart';
 import 'home_page.dart';
 import 'package:latihan1/register_page.dart';
 
@@ -40,62 +43,53 @@ class _LoginPageState extends State<LoginPage> {
             ),
 
             SizedBox(height: 20),
-            TextField(
+            CustomTextField(
+              hintText: "Username",
               controller: _usernameController,
-              decoration: InputDecoration(
-                hintText: "Username",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
+              obscureText: false,
             ),
             SizedBox(height: 20),
-            TextField(
-              obscureText: true,
+            CustomTextField(
+              hintText: "Password",
               controller: _passwordController,
-              decoration: InputDecoration(
-                hintText: "Password",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
+              obscureText: true,
             ),
             Center(
-              child: ElevatedButton(
+              child: CustomButton(
+                text: "Login",
+                textColor: Colors.blueAccent,
                 onPressed: () {
-                  String username = "admin";
-                  String password = "123";
+                  String username = _usernameController.text;
+                  String password = _passwordController.text;
 
-                  if (_usernameController.text == username &&
-                      _passwordController.text == password) {
+                  if (username == "admin" && password == "123") {
                     setState(() {
-                      statusLogin = "Login Successful! 🎉";
+                      statusLogin = "Login successful!";
                     });
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const HomePage()),
+                      MaterialPageRoute(builder: (context) => CalculatorPage()),
                     );
                   } else {
                     setState(() {
-                      statusLogin = "Login Failed! Please try again.";
+                      statusLogin = "Invalid username or password.";
                     });
                   }
                 },
-                child: const Text('Login'),
               ),
             ),
             Text(statusLogin),
             SizedBox(height: 20),
             Center(
-              child: ElevatedButton(
+              child: CustomButton(
+                text: "Register",
+                textColor: Colors.indigoAccent,
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => RegisterPage()),
                   );
                 },
-
-                child: const Text('Register'),
               ),
             ),
           ],

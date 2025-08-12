@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:latihan1/widget/widget_button.dart';
+import 'package:latihan1/widget/widget_textField.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -36,29 +38,22 @@ class _RegisterPageState extends State<RegisterPage> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            TextField(
+            CustomTextField(
               controller: _nameController,
-              decoration: const InputDecoration(
-                labelText: "Nama",
-                border: OutlineInputBorder(),
-              ),
+              hintText: "Nama Lengkap",
+              obscureText: false,
             ),
             const SizedBox(height: 16),
-            TextField(
+            CustomTextField(
+              hintText: "Email",
               controller: _emailController,
-              decoration: const InputDecoration(
-                labelText: "Email / Username",
-                border: OutlineInputBorder(),
-              ),
+              obscureText: false,
             ),
             const SizedBox(height: 16),
-            TextField(
-              obscureText: true,
+            CustomTextField(
+              hintText: "Password",
               controller: _passwordController,
-              decoration: const InputDecoration(
-                labelText: "Password",
-                border: OutlineInputBorder(),
-              ),
+              obscureText: true,
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<String>(
@@ -94,14 +89,37 @@ class _RegisterPageState extends State<RegisterPage> {
               ],
             ),
             const SizedBox(height: 24),
-            ElevatedButton(
+            CustomButton(
+              text: "Register",
+              textColor: Colors.indigo,
               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Register berhasil!")),
-                );
-                Navigator.pop(context);
+                // Handle registration logic here
+                String name = _nameController.text;
+                String email = _emailController.text;
+                String password = _passwordController.text;
+
+                if (name.isNotEmpty &&
+                    email.isNotEmpty &&
+                    password.isNotEmpty &&
+                    _selectedDate != null) {
+                  // Registration successful
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Registration successful for $name"),
+                    ),
+                  );
+                  Navigator.pop(context);
+                } else {
+                  // Show error message
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                        "Please fill all fields and select a date.",
+                      ),
+                    ),
+                  );
+                }
               },
-              child: const Text("Daftar"),
             ),
           ],
         ),
