@@ -4,6 +4,7 @@ import 'package:latihan1/login_page.dart';
 import 'package:latihan1/pages/calculator_page.dart';
 import 'package:latihan1/routes/pages.dart';
 import 'package:latihan1/routes/routes.dart';
+import 'package:latihan1/pages/main_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      initialRoute: AppRoutes.calculator,
+      initialRoute: AppRoutes.mainPage,
       getPages: AppPages.pages,
     );
   }
