@@ -1,41 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:latihan1/controllers/football_controller.dart';
+import 'package:latihan1/controllers/football_edit_controller.dart';
 import 'package:latihan1/widget/widget_button.dart';
 
-class FootballEditPage extends StatefulWidget {
-  const FootballEditPage({super.key});
+class FootballEditPage extends StatelessWidget {
+  FootballEditPage({super.key});
 
-  @override
-  State<FootballEditPage> createState() => _FootballEditPageState();
-}
-
-class _FootballEditPageState extends State<FootballEditPage> {
-  final FootballController footballController = Get.find();
-  late TextEditingController nameController;
-  late TextEditingController positionController;
-  late TextEditingController teamController;
-  late int playerIndex;
-
-  @override
-  void initState() {
-    super.initState();
-    final player = Get.arguments;
-    playerIndex = footballController.players.indexWhere(
-      (p) => p.name == player.name && p.team == player.team,
-    );
-    nameController = TextEditingController(text: player.name);
-    positionController = TextEditingController(text: player.position);
-    teamController = TextEditingController(text: player.team);
-  }
-
-  @override
-  void dispose() {
-    nameController.dispose();
-    positionController.dispose();
-    teamController.dispose();
-    super.dispose();
-  }
+  final FootballEditController controller = Get.put(FootballEditController());
 
   @override
   Widget build(BuildContext context) {
@@ -82,11 +53,11 @@ class _FootballEditPageState extends State<FootballEditPage> {
                 ),
               ),
               const SizedBox(height: 24),
-              _buildTextField(nameController, "Name"),
+              _buildTextField(controller.nameController, "Name"),
               const SizedBox(height: 16),
-              _buildTextField(positionController, "Position"),
+              _buildTextField(controller.positionController, "Position"),
               const SizedBox(height: 16),
-              _buildTextField(teamController, "Team"),
+              _buildTextField(controller.teamController, "Team"),
               const SizedBox(height: 32),
               Center(
                 child: SizedBox(
@@ -94,17 +65,7 @@ class _FootballEditPageState extends State<FootballEditPage> {
                   child: CustomButton(
                     text: "Save Changes",
                     textColor: Colors.white,
-                    onPressed: () {
-                      final updatedPlayer = footballController
-                          .players[playerIndex]
-                          .copyWith(
-                            name: nameController.text,
-                            position: positionController.text,
-                            team: teamController.text,
-                          );
-                      footballController.players[playerIndex] = updatedPlayer;
-                      Get.back();
-                    },
+                    onPressed: controller.saveChanges,
                   ),
                 ),
               ),
