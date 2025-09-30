@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:latihan1/pages/calculator_page.dart';
+import 'package:get/get.dart';
+import 'package:latihan1/controllers/login_controller.dart';
 import 'package:latihan1/widget/widget_button.dart';
 import 'package:latihan1/widget/widget_textField.dart';
-import 'home_page.dart';
-import 'package:latihan1/register_page.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class LoginPage extends StatelessWidget {
+  LoginPage({super.key});
 
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
+  final controller = Get.find<LoginController>();
 
-class _LoginPageState extends State<LoginPage> {
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  String statusLogin = "Please login to continue";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,54 +34,33 @@ class _LoginPageState extends State<LoginPage> {
                 height: 100,
               ),
             ),
-
             SizedBox(height: 20),
             CustomTextField(
               hintText: "Username",
-              controller: _usernameController,
+              controller: controller.usernameController,
               obscureText: false,
             ),
-            SizedBox(height: 20),
             CustomTextField(
               hintText: "Password",
-              controller: _passwordController,
+              controller: controller.passwordController,
               obscureText: true,
             ),
+
             Center(
               child: CustomButton(
                 text: "Login",
                 textColor: Colors.blueAccent,
-                onPressed: () {
-                  String username = _usernameController.text;
-                  String password = _passwordController.text;
-
-                  if (username == "admin" && password == "123") {
-                    setState(() {
-                      statusLogin = "Login successful!";
-                    });
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => CalculatorPage()),
-                    );
-                  } else {
-                    setState(() {
-                      statusLogin = "Invalid username or password.";
-                    });
-                  }
-                },
+                onPressed: controller.login,
               ),
             ),
-            Text(statusLogin),
+            Obx(() => Text(controller.statusLogin.value)),
             SizedBox(height: 20),
             Center(
               child: CustomButton(
                 text: "Register",
                 textColor: Colors.indigoAccent,
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => RegisterPage()),
-                  );
+                  Get.toNamed('/register');
                 },
               ),
             ),

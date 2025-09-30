@@ -6,7 +6,7 @@ import 'package:latihan1/widget/widget_button.dart';
 class FootballEditPage extends StatelessWidget {
   FootballEditPage({super.key});
 
-  final FootballEditController controller = Get.put(FootballEditController());
+  final footballEditController = Get.find<FootballEditController>();
 
   @override
   Widget build(BuildContext context) {
@@ -53,11 +53,14 @@ class FootballEditPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              _buildTextField(controller.nameController, "Name"),
+              _buildTextField(footballEditController.nameController, "Name"),
               const SizedBox(height: 16),
-              _buildTextField(controller.positionController, "Position"),
+              _buildTextField(
+                footballEditController.positionController,
+                "Position",
+              ),
               const SizedBox(height: 16),
-              _buildTextField(controller.teamController, "Team"),
+              _buildTextField(footballEditController.teamController, "Team"),
               const SizedBox(height: 32),
               Center(
                 child: SizedBox(
@@ -65,7 +68,7 @@ class FootballEditPage extends StatelessWidget {
                   child: CustomButton(
                     text: "Save Changes",
                     textColor: Colors.white,
-                    onPressed: controller.saveChanges,
+                    onPressed: footballEditController.saveChanges,
                   ),
                 ),
               ),

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:latihan1/controllers/football_controller.dart';
+import 'package:latihan1/routes/routes.dart';
 import 'package:latihan1/widget/widget_button.dart';
 
 class FootballPage extends StatelessWidget {
   FootballPage({super.key});
-  final FootballController footballController = Get.put(FootballController());
+
+  final footballController = Get.find<FootballController>();
 
   @override
+  
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFF8F9FA),
@@ -167,7 +170,7 @@ class FootballPage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                                 onTap: () {
                                   Get.toNamed(
-                                    '/footballEdit',
+                                   AppRoutes.footballEdit,
                                     arguments: player,
                                   );
                                 },
