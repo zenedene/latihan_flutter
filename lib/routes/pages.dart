@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:latihan1/bindings/auth_binding.dart';
 import 'package:latihan1/bindings/calculator_binding.dart';
+import 'package:latihan1/bindings/contact_binding.dart';
 import 'package:latihan1/bindings/football_binding.dart';
 import 'package:latihan1/bindings/football_edit_binding.dart';
 import 'package:latihan1/bindings/splash_screen_binding.dart';
@@ -47,7 +48,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.contactPage,
       page: () => ContactPage(),
-      binding: LoginBinding(),
+      binding: ContactBinding (),
     ),
   ];
 }
